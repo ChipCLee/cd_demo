@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruit Bar Machine</title>
+    <style>
+        .symbol {
+            font-size: 2em;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fruit Bar Machine</h1>
+    <div id="machine">
+        <span class="symbol" id="symbol1">?</span>
+        <span class="symbol" id="symbol2">?</span>
+        <span class="symbol" id="symbol3">?</span>
+    </div>
+    <button onclick="spin()">Spin</button>
+
+    <script>
+        function spin() {
+            fetch('/proxy/5000/spin')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('symbol1').textContent = data[0];
+                    document.getElementById('symbol2').textContent = data[1];
+                    document.getElementById('symbol3').textContent = data[2];
+                });
+        }
+    </script>
+</body>
+</html>
